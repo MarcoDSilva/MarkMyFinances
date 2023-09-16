@@ -16,5 +16,8 @@ namespace MarkMyFinance.Persistance.Context
 		public DbSet<SubCategory> SubCategories { get; set; }
 		public DbSet<Balance> Balances { get; set; }
 
+
+		// INSERT HERE PRE-FILLING INFO FOR THE CATEGORIES TABLE
+
 	}
 }

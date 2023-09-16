@@ -16,4 +16,8 @@
     <Folder Include="DTO\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MarkMyFinance.Application\MarkMyFinance.Application.csproj" />
+  </ItemGroup>
+
 </Project>
