@@ -8,6 +8,6 @@ namespace MarkMyFinance.Application.Services.Interfaces
 		Task<bool> AddAsync(T entity);
 		Task<bool> RemoveAsync(T entity);
 		Task<bool> EditAsync(T entity);
-		Task<Category?> GetByID(int id);
+		Task<T?> GetByID(int id);
 	}
 }

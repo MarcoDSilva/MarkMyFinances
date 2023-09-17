@@ -1,32 +1,34 @@
-﻿using MarkMyFinance.Persistance.Repository.Interfaces;
+﻿using MarkMyFinance.Domain.Entities;
+using MarkMyFinance.Domain.Interfaces;
+using MarkMyFinance.Persistance.Repository.Interfaces;
 
 namespace MarkMyFinance.Persistance.Repository
 {
-    public class UnitOfWork : IUnitOfWork
-    {
-        public ICategoryRepository CategoryRepository { get; }
+	public class UnitOfWork : IUnitOfWork
+	{
+		public IRepository<Category> CategoryRepository { get; }
 
-        public ISubCategoryRepository SubCategoryRepository { get; }
+		public IRepository<SubCategory> SubCategoryRepository { get; }
 
-        public IExpensesRepository ExpensesRepository { get; }
+		public IRepository<Expense> ExpensesRepository { get; }
 
-        public IIncomeRepository IncomeRepository { get; }
+		public IRepository<Income> IncomeRepository { get; }
 
-        public IInvestmentRepository InvestmentRepository { get; }
+		public IRepository<Investment> InvestmentRepository { get; }
 
-        public UnitOfWork(
-                ICategoryRepository categoryRepository,
-                ISubCategoryRepository subCategoryRepository,
-                IExpensesRepository expensesRepository,
-                IIncomeRepository incomeRepository,
-                IInvestmentRepository investmentRepository
-            )
-        {
-            CategoryRepository = categoryRepository;
-            SubCategoryRepository = subCategoryRepository;
-            ExpensesRepository = expensesRepository;
-            IncomeRepository = incomeRepository;
-            InvestmentRepository = investmentRepository;
-        }
-    }
+		public UnitOfWork(
+				IRepository<Category> categoryRepository,
+				IRepository<SubCategory> subCategoryRepository,
+				IRepository<Expense> expensesRepository,
+				IRepository<Income> incomeRepository,
+				IRepository<Investment> investmentRepository
+			)
+		{
+			CategoryRepository = categoryRepository;
+			SubCategoryRepository = subCategoryRepository;
+			ExpensesRepository = expensesRepository;
+			IncomeRepository = incomeRepository;
+			InvestmentRepository = investmentRepository;
+		}
+	}
 }

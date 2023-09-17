@@ -1,6 +1,6 @@
 ﻿namespace MarkMyFinance.Domain.Interfaces
 {
-	public interface IOperations<T> where T : class
+	public interface IRepository<T> where T : class
 	{
 		Task<bool> CreateAsync(T entity);
 		Task<bool> UpdateAsync(T entity);

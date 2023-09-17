@@ -1,12 +1,11 @@
-﻿using MarkMyFinance.Persistance.Repository.Interfaces;
-using MarkMyFinance.Domain.Entities;
+﻿using MarkMyFinance.Domain.Entities;
 using MarkMyFinance.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Immutable;
+using MarkMyFinance.Domain.Interfaces;
 
 namespace MarkMyFinance.Persistance.Repository
 {
-	public class ExpensesRepository : IExpensesRepository
+	public class ExpensesRepository : IRepository<Expense>
 	{
 		private readonly FinancesDBContext _dbContext;
 		public ExpensesRepository(FinancesDBContext dBContext)

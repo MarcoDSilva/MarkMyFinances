@@ -1,9 +1,9 @@
-﻿using MarkMyFinance.Persistance.Repository.Interfaces;
-using MarkMyFinance.Domain.Entities;
+﻿using MarkMyFinance.Domain.Entities;
+using MarkMyFinance.Domain.Interfaces;
 
 namespace MarkMyFinance.Persistance.Repository
 {
-	public class InvestmentRepository : IInvestmentRepository
+	public class InvestmentRepository : IRepository<Investment>
 	{
 		public Task<bool> CreateAsync(Investment entity)
 		{

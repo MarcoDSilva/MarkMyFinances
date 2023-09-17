@@ -1,11 +1,14 @@
-﻿namespace MarkMyFinance.Persistance.Repository.Interfaces
+﻿using MarkMyFinance.Domain.Entities;
+using MarkMyFinance.Domain.Interfaces;
+
+namespace MarkMyFinance.Persistance.Repository.Interfaces
 {
 	public interface IUnitOfWork
 	{
-		ICategoryRepository CategoryRepository { get; }
-		ISubCategoryRepository SubCategoryRepository { get; }
-		IExpensesRepository ExpensesRepository { get; }
-		IIncomeRepository IncomeRepository { get; }
-		IInvestmentRepository InvestmentRepository { get; }
+		IRepository<Category> CategoryRepository { get; }
+		IRepository<SubCategory> SubCategoryRepository { get; }
+		IRepository<Expense> ExpensesRepository { get; }
+		IRepository<Income> IncomeRepository { get; }
+		IRepository<Investment> InvestmentRepository { get; }
 	}
 }

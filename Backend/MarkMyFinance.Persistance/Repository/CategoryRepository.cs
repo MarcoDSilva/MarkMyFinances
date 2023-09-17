@@ -1,11 +1,11 @@
-﻿using MarkMyFinance.Persistance.Repository.Interfaces;
-using MarkMyFinance.Domain.Entities;
+﻿using MarkMyFinance.Domain.Entities;
 using MarkMyFinance.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
+using MarkMyFinance.Domain.Interfaces;
 
 namespace MarkMyFinance.Persistance.Repository
 {
-	public class CategoryRepository : ICategoryRepository
+	public class CategoryRepository : IRepository<Category>
 	{
 		private readonly FinancesDBContext _dbContext;
 		public CategoryRepository(FinancesDBContext dBContext)

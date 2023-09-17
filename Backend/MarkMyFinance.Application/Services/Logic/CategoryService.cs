@@ -2,41 +2,67 @@
 using MarkMyFinance.Persistance.Repository.Interfaces;
 using MarkMyFinance.Application.Services.Interfaces;
 using MarkMyFinance.Domain.Entities;
+using AutoMapper;
 
 namespace MarkMyFinance.Application.Services.Logic
 {
 	public class CategoryService : IServices<CategoryDto>
 	{
 		private readonly IUnitOfWork _unitOfWork;
+		private readonly IMapper _mapper;
 
-		public CategoryService(IUnitOfWork unitOfWork)
+		public CategoryService(IUnitOfWork unitOfWork, IMapper mapper)
 		{
 			_unitOfWork = unitOfWork;
+			_mapper = mapper;
 		}
 
-		public Task<bool> AddAsync(CategoryDto entity)
+		public async Task<bool> AddAsync(CategoryDto entity)
 		{
-			throw new NotImplementedException();
+			var category = new Category()
+			{
+				Name = entity.Name,
+				CreatedAt = DateTime.Now,
+				UpdatedAt = DateTime.Now
+			};
+
+			var wasCategoryAdded = await _unitOfWork.CategoryRepository.CreateAsync(category);
+
+			return wasCategoryAdded;
 		}
 
-		public Task<bool> EditAsync(CategoryDto entity)
+		public async Task<bool> EditAsync(CategoryDto entity)
 		{
-			throw new NotImplementedException();
+			var category = _mapper.Map<CategoryDto, Category>(entity);
+			var wasEdited = await _unitOfWork.CategoryRepository.UpdateAsync(category);
+			return wasEdited;
 		}
 
-		public Task<List<CategoryDto>> GetAllAsync()
+		public async Task<List<CategoryDto>> GetAllAsync()
 		{
-			throw new NotImplementedException();
+			var categories = await _unitOfWork.CategoryRepository.GetAllAsync();
+
+			if (categories.Count == 0)
+				return new List<CategoryDto>();
+
+			var categoriesDto = new List<CategoryDto>();
+			categories.ForEach(ct => categoriesDto.Add(_mapper.Map<Category, CategoryDto>(ct)));
+
+			return categoriesDto;
 		}
 
-		public Task<Category?> GetByID(int id)
+		public async Task<CategoryDto?> GetByID(int id)
 		{
-			throw new NotImplementedException();
+			var category = await _unitOfWork.CategoryRepository.GetByIdAsync(id);
+			return category is null ? new CategoryDto() : _mapper.Map<Category, CategoryDto>(category);
 		}
 
-		public Task<bool> RemoveAsync(CategoryDto entity)
+		public async Task<bool> RemoveAsync(CategoryDto entity)
 		{
-			throw new NotImplementedException();
+			var category = _mapper.Map<CategoryDto, Category>(entity);
+			var wasRemoved = await _unitOfWork.CategoryRepository.DeleteAsync(category);
+
+			return wasRemoved;
 		}
 	}
 }
