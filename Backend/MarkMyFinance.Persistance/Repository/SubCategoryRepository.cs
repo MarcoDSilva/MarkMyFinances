@@ -3,7 +3,7 @@ using MarkMyFinance.Domain.Entities;
 using MarkMyFinance.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace MarkMyFinance.Application.Repository
+namespace MarkMyFinance.Persistance.Repository
 {
 	public class SubCategoryRepository : ISubCategoryRepository
 	{

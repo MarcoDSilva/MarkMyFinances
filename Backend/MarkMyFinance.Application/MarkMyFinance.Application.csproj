@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Interfaces\" />
-    <Folder Include="Services\Logic\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MarkMyFinance.Domain\MarkMyFinance.Domain.csproj" />
     <ProjectReference Include="..\MarkMyFinance.Persistance\MarkMyFinance.Persistance.csproj" />
   </ItemGroup>

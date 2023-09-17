@@ -4,7 +4,7 @@ using MarkMyFinance.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Immutable;
 
-namespace MarkMyFinance.Application.Repository
+namespace MarkMyFinance.Persistance.Repository
 {
 	public class ExpensesRepository : IExpensesRepository
 	{

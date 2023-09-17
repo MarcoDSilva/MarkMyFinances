@@ -1,7 +1,7 @@
 ﻿using MarkMyFinance.Persistance.Repository.Interfaces;
 using MarkMyFinance.Domain.Entities;
 
-namespace MarkMyFinance.Application.Repository
+namespace MarkMyFinance.Persistance.Repository
 {
 	public class InvestmentRepository : IInvestmentRepository
 	{
