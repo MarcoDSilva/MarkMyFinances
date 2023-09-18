@@ -2,7 +2,7 @@
 
 namespace MarkMyFinance.Application.DTO
 {
-    public class ExpenseDto : IBaseTransaction
+    public class IncomeDto : IBaseTransaction
 	{	
 	}
 }

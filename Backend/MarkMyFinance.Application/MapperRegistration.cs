@@ -11,6 +11,11 @@ namespace MarkMyFinance.Application
 			var mapConfig = new MapperConfiguration(config =>
 			{
 				config.CreateMap<CategoryDto, Category>().ReverseMap();
+				config.CreateMap<ExpenseDto, Expense>().ReverseMap();
+				config.CreateMap<IncomeDto, Income>().ReverseMap();
+				config.CreateMap<InvestmentDto, Investment>().ReverseMap();
+				config.CreateMap<SubCategoryDto, SubCategory>().ReverseMap();
+				config.CreateMap<BalanceDto, Balance>().ReverseMap();
 			});
 
 			return mapConfig;

@@ -41,11 +41,11 @@ namespace MarkMyFinance.Application.Services.Logic
 		public async Task<List<CategoryDto>> GetAllAsync()
 		{
 			var categories = await _unitOfWork.CategoryRepository.GetAllAsync();
+			var categoriesDto = new List<CategoryDto>();
 
 			if (categories.Count == 0)
-				return new List<CategoryDto>();
+				return categoriesDto;
 
-			var categoriesDto = new List<CategoryDto>();
 			categories.ForEach(ct => categoriesDto.Add(_mapper.Map<Category, CategoryDto>(ct)));
 
 			return categoriesDto;

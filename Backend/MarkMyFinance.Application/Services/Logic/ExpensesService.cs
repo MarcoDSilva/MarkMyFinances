@@ -29,17 +29,18 @@ namespace MarkMyFinance.Application.Services.Logic
 		{
 			var expense = _mapper.Map<ExpenseDto, Expense>(entity);
 			var wasEdited = await _unitOfWork.ExpensesRepository.UpdateAsync(expense);
+
 			return wasEdited;
 		}
 
 		public async Task<List<ExpenseDto>> GetAllAsync()
 		{
 			var expenses = await _unitOfWork.ExpensesRepository.GetAllAsync();
+			var expensesDto = new List<ExpenseDto>();
 
 			if (expenses.Count == 0)
-				return new List<ExpenseDto>();
+				return expensesDto;
 
-			var expensesDto = new List<ExpenseDto>();
 			expenses.ForEach(exp => expensesDto.Add(_mapper.Map<Expense, ExpenseDto>(exp)));
 
 			return expensesDto;
@@ -48,10 +49,7 @@ namespace MarkMyFinance.Application.Services.Logic
 		public async Task<ExpenseDto?> GetByID(int id)
 		{
 			var expense = await _unitOfWork.ExpensesRepository.GetByIdAsync(id);
-			if (expense is null) return new ExpenseDto();
-
-			var dto = _mapper.Map<Expense, ExpenseDto>(expense);
-			return dto;
+			return expense is null ? new ExpenseDto() : _mapper.Map<Expense, ExpenseDto>(expense);
 		}
 
 		public Task<bool> RemoveAsync(ExpenseDto entity)
