@@ -14,6 +14,7 @@ namespace MarkMyFinance.Application
 			services.AddScoped<IServices<IncomeDto>, IncomeService>();
 			services.AddScoped<IServices<InvestmentDto>, InvestmentService>();
 			services.AddScoped<IServices<SubCategoryDto>, SubCategoryService>();
+			services.AddScoped<IServices<BalanceDto>, BalanceService>();
 
 			return services;
 		}

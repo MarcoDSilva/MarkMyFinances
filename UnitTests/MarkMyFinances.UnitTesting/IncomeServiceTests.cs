@@ -1,6 +1,7 @@
-namespace MarkMyFinances.UnitTesting
+﻿namespace MarkMyFinances.UnitTesting
 {
-	public class Tests
+	[TestFixture]
+	public class IncomeServiceTests
 	{
 		[SetUp]
 		public void Setup()

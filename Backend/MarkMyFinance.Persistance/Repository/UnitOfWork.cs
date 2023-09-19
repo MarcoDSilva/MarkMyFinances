@@ -16,12 +16,15 @@ namespace MarkMyFinance.Persistance.Repository
 
 		public IRepository<Investment> InvestmentRepository { get; }
 
+		public IRepository<Balance> BalanceRepository { get; }
+
 		public UnitOfWork(
 				IRepository<Category> categoryRepository,
 				IRepository<SubCategory> subCategoryRepository,
 				IRepository<Expense> expensesRepository,
 				IRepository<Income> incomeRepository,
-				IRepository<Investment> investmentRepository
+				IRepository<Investment> investmentRepository,
+				IRepository<Balance> balanceRepository
 			)
 		{
 			CategoryRepository = categoryRepository;
@@ -29,6 +32,7 @@ namespace MarkMyFinance.Persistance.Repository
 			ExpensesRepository = expensesRepository;
 			IncomeRepository = incomeRepository;
 			InvestmentRepository = investmentRepository;
+			BalanceRepository = balanceRepository;
 		}
 	}
 }

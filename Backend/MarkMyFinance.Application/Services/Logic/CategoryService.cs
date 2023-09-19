@@ -19,12 +19,7 @@ namespace MarkMyFinance.Application.Services.Logic
 
 		public async Task<bool> AddAsync(CategoryDto entity)
 		{
-			var category = new Category()
-			{
-				Name = entity.Name,
-				CreatedAt = DateTime.Now,
-				UpdatedAt = DateTime.Now
-			};
+			var category = _mapper.Map<CategoryDto, Category>(entity);
 
 			var wasCategoryAdded = await _unitOfWork.CategoryRepository.CreateAsync(category);
 

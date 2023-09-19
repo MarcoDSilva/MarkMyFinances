@@ -10,5 +10,6 @@ namespace MarkMyFinance.Persistance.Repository.Interfaces
 		IRepository<Expense> ExpensesRepository { get; }
 		IRepository<Income> IncomeRepository { get; }
 		IRepository<Investment> InvestmentRepository { get; }
+		IRepository<Balance> BalanceRepository { get; }
 	}
 }
