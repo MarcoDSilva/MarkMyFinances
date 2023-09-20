@@ -17,4 +17,8 @@
     <ProjectReference Include="..\MarkMyFinance.Persistance\MarkMyFinance.Persistance.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
+
 </Project>
