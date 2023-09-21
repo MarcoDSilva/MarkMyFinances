@@ -6,7 +6,7 @@ namespace MarkMyFinance.Application.Services.Interfaces
 	{
 		Task<List<T>> GetAllAsync();
 		Task<bool> AddAsync(T entity);
-		Task<bool> RemoveAsync(T entity);
+		Task<bool> RemoveAsync(int id);
 		Task<bool> EditAsync(T entity);
 		Task<T?> GetByID(int id);
 	}

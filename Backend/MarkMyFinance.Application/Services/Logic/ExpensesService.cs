@@ -52,10 +52,13 @@ namespace MarkMyFinance.Application.Services.Logic
 			return expense is null ? new ExpenseDto() : _mapper.Map<Expense, ExpenseDto>(expense);
 		}
 
-		public Task<bool> RemoveAsync(ExpenseDto entity)
+		public async Task<bool> RemoveAsync(int id)
 		{
-			var expense = _mapper.Map<ExpenseDto, Expense>(entity);
-			var wasRemoved = _unitOfWork.ExpensesRepository.DeleteAsync(expense);
+			var expense = await _unitOfWork.ExpensesRepository.GetByIdAsync(id);
+			bool wasRemoved = false;
+
+			if (expense is not null && expense.Id > 0)
+				wasRemoved = await _unitOfWork.ExpensesRepository.DeleteAsync(expense);
 
 			return wasRemoved;
 		}

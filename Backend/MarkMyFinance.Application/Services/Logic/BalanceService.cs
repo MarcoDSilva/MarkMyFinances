@@ -52,11 +52,14 @@ namespace MarkMyFinance.Application.Services.Logic
 				? new BalanceDto() : _mapper.Map<Balance, BalanceDto>(balance);
 		}
 
-		public async Task<bool> RemoveAsync(BalanceDto entity)
+		public async Task<bool> RemoveAsync(int id)
 		{
-			var balance = _mapper.Map<BalanceDto, Balance>(entity);
-			var wasRemoved = await _unitOfWork.BalanceRepository.DeleteAsync(balance);
+			var balance = await _unitOfWork.BalanceRepository.GetByIdAsync(id);
+			bool wasRemoved = false;
 
+			if (balance is not null && balance.Id > 0)			
+				wasRemoved = await _unitOfWork.BalanceRepository.DeleteAsync(balance);
+			
 			return wasRemoved;
 		}
 	}

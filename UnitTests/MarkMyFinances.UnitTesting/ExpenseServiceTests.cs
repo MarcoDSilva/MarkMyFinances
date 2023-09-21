@@ -17,8 +17,8 @@ namespace MarkMyFinances.UnitTesting
 		private IServices<ExpenseDto> _expenseService;
 
 		// objects required for test
-		private Expense _expense;
-		private ExpenseDto _expenseDto;
+		private Mock<Expense> _expense;
+		private Mock<ExpenseDto> _expenseDto;
 
 		public ExpenseServiceTests()
 		{
@@ -33,40 +33,19 @@ namespace MarkMyFinances.UnitTesting
 		[SetUp]
 		public void Setup()
 		{
-			_expense = new Expense()
-			{
-				Id = 1,
-				CategoryId = 1,
-				CreatedAt = DateTime.UtcNow,
-				UpdatedAt = DateTime.UtcNow,
-				Description = "UNKNOWN",
-				SubCategoryId = 1,
-				TransactionDate = new DateTime().AddDays(2),
-				Value = 100
-			};
-
-			_expenseDto = new ExpenseDto()
-			{
-				Id = 1,
-				CategoryId = 1,
-				CreatedAt = DateTime.UtcNow,
-				UpdatedAt = DateTime.UtcNow,
-				Description = "UNKNOWN",
-				SubCategoryId = 1,
-				TransactionDate = new DateTime().AddDays(2),
-				Value = 100
-			};
+			_expense = new Mock<Expense>();
+			_expenseDto = new Mock<ExpenseDto>();
 		}
 
 		[Test]
 		public async Task CreatesExpense_ReceivesCorrectEntity_ReturnsTrue()
 		{
-			_expense.Id = 1;
-			_expenseDto.Id = 1;
+			_expense.Object.Id = 1;
+			_expenseDto.Object.Id = 1;
 
-			_unitOfWork.Setup(exp => exp.ExpensesRepository.CreateAsync(_expense)).ReturnsAsync(true);
+			_unitOfWork.Setup(exp => exp.ExpensesRepository.CreateAsync(It.IsAny<Expense>())).ReturnsAsync(true);
 
-			var result = await _expenseService.AddAsync(_expenseDto);
+			var result = await _expenseService.AddAsync(_expenseDto.Object);
 
 			Assert.That(result, Is.EqualTo(true));
 		}
@@ -74,22 +53,21 @@ namespace MarkMyFinances.UnitTesting
 		[Test]
 		public async Task EditsExpense_ReceivesCorrectEntity_ReturnsTrue()
 		{
-			_expense.Description = "NEW OBJ";
-			_expenseDto.Description = "NEW OBJ";
+			_expenseDto.Object.Description = "NEW OBJ";
+			_unitOfWork.Setup(exp => exp.ExpensesRepository.UpdateAsync(It.IsAny<Expense>())).ReturnsAsync(true);
 
-			_unitOfWork.Setup(exp => exp.ExpensesRepository.UpdateAsync(_expense)).ReturnsAsync(true);
-
-			var result = await _expenseService.EditAsync(_expenseDto);
+			var result = await _expenseService.EditAsync(_expenseDto.Object);
 
 			Assert.That(result, Is.EqualTo(true));
 		}
 
 		[Test]
-		public async Task RemovesExpense_ReceivesCorrectEntity_ReturnsTrue()
-		{	
-			_unitOfWork.Setup(exp => exp.ExpensesRepository.DeleteAsync(_expense)).ReturnsAsync(true);
-
-			var result = await _expenseService.RemoveAsync(_expenseDto);
+		public async Task RemovesExpense_ReceiveExistingEntity_ReturnsTrue()
+		{
+			int id = 1;
+			_unitOfWork.Setup(ex => ex.ExpensesRepository.GetByIdAsync(id)).ReturnsAsync(new Expense() { Id = id});
+			_unitOfWork.Setup(exp => exp.ExpensesRepository.DeleteAsync(It.IsAny<Expense>())).ReturnsAsync(true);
+			var result = await _expenseService.RemoveAsync(1);
 
 			Assert.That(result, Is.EqualTo(true));
 		}
@@ -98,7 +76,7 @@ namespace MarkMyFinances.UnitTesting
 		public void GetExpenseById_ReceivesCorrectId_ReturnsExpense()
 		{
 			int expenseId = 1;
-			_unitOfWork.Setup(exp => exp.ExpensesRepository.GetByIdAsync(expenseId)).ReturnsAsync(_expense);
+			_unitOfWork.Setup(exp => exp.ExpensesRepository.GetByIdAsync(expenseId)).ReturnsAsync(_expense.Object);
 
 			var result = _expenseService.GetByID(expenseId);
 

@@ -52,10 +52,13 @@ namespace MarkMyFinance.Application.Services.Logic
 			return category is null ? new CategoryDto() : _mapper.Map<Category, CategoryDto>(category);
 		}
 
-		public async Task<bool> RemoveAsync(CategoryDto entity)
+		public async Task<bool> RemoveAsync(int id)
 		{
-			var category = _mapper.Map<CategoryDto, Category>(entity);
-			var wasRemoved = await _unitOfWork.CategoryRepository.DeleteAsync(category);
+			var category = await _unitOfWork.CategoryRepository.GetByIdAsync(id);
+			bool wasRemoved = false;
+
+			if (category is not null && category.Id > 0)
+				wasRemoved = await _unitOfWork.CategoryRepository.DeleteAsync(category);
 
 			return wasRemoved;
 		}

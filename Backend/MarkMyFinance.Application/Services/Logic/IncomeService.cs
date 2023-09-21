@@ -53,11 +53,13 @@ namespace MarkMyFinance.Application.Services.Logic
 			return income is null ? new IncomeDto() : _mapper.Map<Income, IncomeDto>(income);
 		}
 
-		public async Task<bool> RemoveAsync(IncomeDto entity)
+		public async Task<bool> RemoveAsync(int id)
 		{
-			var income = _mapper.Map<IncomeDto, Income>(entity);
-
-			var wasRemoved = await _unitOfWork.IncomeRepository.DeleteAsync(income);
+			var income = await _unitOfWork.IncomeRepository.GetByIdAsync(id);
+			bool wasRemoved = false;
+			
+			if (income is not null && income.Id > 0)
+				wasRemoved = await _unitOfWork.IncomeRepository.DeleteAsync(income);
 
 			return wasRemoved;
 		}

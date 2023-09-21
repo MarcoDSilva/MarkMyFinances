@@ -55,10 +55,13 @@ namespace MarkMyFinance.Application.Services.Logic
 			return investment is null ? new InvestmentDto() : _mapper.Map<Investment, InvestmentDto>(investment);
 		}
 
-		public async Task<bool> RemoveAsync(InvestmentDto entity)
+		public async Task<bool> RemoveAsync(int id)
 		{
-			var investment = _mapper.Map<InvestmentDto, Investment>(entity);
-			var wasRemoved = await _unitOfWork.InvestmentRepository.DeleteAsync(investment);
+			var investment = await _unitOfWork.InvestmentRepository.GetByIdAsync(id);
+			bool wasRemoved = false;
+
+			if (investment is not null && investment.Id > 0)
+				wasRemoved = await _unitOfWork.InvestmentRepository.DeleteAsync(investment);
 
 			return wasRemoved;
 		}

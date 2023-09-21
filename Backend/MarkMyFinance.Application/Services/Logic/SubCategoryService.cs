@@ -52,10 +52,13 @@ namespace MarkMyFinance.Application.Services.Logic
 				? new SubCategoryDto() : _mapper.Map<SubCategory, SubCategoryDto>(subCategory);
 		}
 
-		public async Task<bool> RemoveAsync(SubCategoryDto entity)
+		public async Task<bool> RemoveAsync(int id)
 		{
-			var subCategory = _mapper.Map<SubCategoryDto, SubCategory>(entity);
-			var wasRemoved = await _unitOfWork.SubCategoryRepository.DeleteAsync(subCategory);
+			var subCategory = await _unitOfWork.SubCategoryRepository.GetByIdAsync(id);
+			bool wasRemoved = false;
+
+			if (subCategory is not null && subCategory.Id > 0)
+				wasRemoved = await _unitOfWork.SubCategoryRepository.DeleteAsync(subCategory);
 
 			return wasRemoved;
 		}
