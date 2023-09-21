@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MarkMyFinance.Application\MarkMyFinance.Application.csproj" />
     <ProjectReference Include="..\MarkMyFinance.Persistance\MarkMyFinance.Persistance.csproj" />
   </ItemGroup>
