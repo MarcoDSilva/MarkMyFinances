@@ -11,6 +11,7 @@ namespace MarkMyFinance.Persistance
 		public static IServiceCollection AddRepository(this IServiceCollection services)
 		{
 			services
+				.AddScoped<IRepository<Balance>, BalanceRepository>()
 				.AddScoped<IRepository<Category>, CategoryRepository>()
 				.AddScoped<IRepository<Expense>, ExpensesRepository>()
 				.AddScoped<IRepository<Income>, IncomeRepository>()

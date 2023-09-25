@@ -10,7 +10,7 @@ namespace MarkMyFinance.Persistance
 		{
 			services.AddDbContext<FinancesDBContext>(options =>
 			{
-				options.UseSqlite("Data Source=C:\\MarkMyFinance\\Database\\MarkMyFinance.db");
+				options.UseSqlite("Data Source=D:\\Coding\\MarkMyFinance\\Database\\MarkMyFinance.db");
 			});
 
 			return services;

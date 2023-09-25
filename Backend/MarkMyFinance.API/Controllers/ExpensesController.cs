@@ -11,7 +11,7 @@ namespace MarkMyFinance.API.Controllers
 	[ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
 	[ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
 	[ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-
+	[ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
 	public class ExpensesController : ControllerBase
 	{
 		private readonly IServices<ExpenseDto> _expenseService;
