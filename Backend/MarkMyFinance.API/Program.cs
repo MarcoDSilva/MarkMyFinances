@@ -15,8 +15,10 @@ internal class Program
 		builder.Services.AddSwaggerGen();
 
 		// Services from Application layer
+
 		IMapper mapper = MapperRegistration.RegisterMapper().CreateMapper();
-		builder.Services.AddAutoMapper(mapper.ConfigurationProvider.GetType().Assembly);
+		builder.Services.AddSingleton(mapper);
+
 		builder.Services.AddServices();
 
 		// Repository from Persistance layer

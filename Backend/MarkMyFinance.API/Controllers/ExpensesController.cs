@@ -1,4 +1,5 @@
 ﻿using MarkMyFinance.API.DTO;
+using MarkMyFinance.Application.DTO;
 using MarkMyFinance.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -54,9 +55,18 @@ namespace MarkMyFinance.API.Controllers
 		}
 
 		[HttpPut()]
-		public async Task<IActionResult> Update([FromBody] ExpenseDto expense)
+		public async Task<IActionResult> Update([FromBody] ExpenseRequest expense)
 		{
-			var expenseEdited = await _expenseService.EditAsync(expense);
+			var expenseDto = new ExpenseDto()
+			{
+				CategoryId = expense.CategoryId,
+				Description = expense.Description,
+				SubCategoryId = expense.SubCategoryId,
+				TransactionDate = expense.TransactionDate,
+				Value = expense.Value
+			};
+
+			var expenseEdited = await _expenseService.EditAsync(expenseDto);
 			return expenseEdited ? Ok() : Problem();
 		}
 
