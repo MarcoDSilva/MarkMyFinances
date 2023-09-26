@@ -34,7 +34,7 @@ namespace MarkMyFinance.API.Controllers
 		{
 			var expense = await _expenseService.GetByID(id);
 
-			return Ok(expense);
+			return expense is null || expense.Id <= 0 ? NotFound() : Ok(expense);
 		}
 
 		[HttpPost]
@@ -63,7 +63,8 @@ namespace MarkMyFinance.API.Controllers
 				Description = expense.Description,
 				SubCategoryId = expense.SubCategoryId,
 				TransactionDate = expense.TransactionDate,
-				Value = expense.Value
+				Value = expense.Value,
+				Id = expense.Id
 			};
 
 			var expenseEdited = await _expenseService.EditAsync(expenseDto);
