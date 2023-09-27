@@ -50,6 +50,20 @@ namespace MarkMyFinances.UnitTesting
 			Assert.That(result, Is.EqualTo(true));
 		}
 
+		// this will be a exception
+		[Test]
+		public async Task CreatesExpense_ReceivesWrongEntity_ReturnsFalse()
+		{
+			_expense.Object.Id = 1;
+			_expenseDto.Object.Id = 1;
+
+			_unitOfWork.Setup(exp => exp.ExpensesRepository.CreateAsync(It.IsAny<Expense>())).ReturnsAsync(false);
+
+			var result = await _expenseService.AddAsync(new Mock<ExpenseDto>().Object);
+
+			Assert.That(result, Is.EqualTo(false));
+		}
+
 		[Test]
 		public async Task EditsExpense_ReceivesCorrectEntity_ReturnsTrue()
 		{
@@ -60,6 +74,19 @@ namespace MarkMyFinances.UnitTesting
 
 			Assert.That(result, Is.EqualTo(true));
 		}
+
+		// this will be a exception
+		[Test]
+		public async Task EditsExpense_ReceivesWrongEntity_ReturnsFalse()
+		{
+			_expenseDto.Object.Description = "NEW OBJ";
+			_unitOfWork.Setup(exp => exp.ExpensesRepository.UpdateAsync(It.IsAny<Expense>())).ReturnsAsync(false);
+
+			var result = await _expenseService.EditAsync(_expenseDto.Object);
+
+			Assert.That(result, Is.EqualTo(false));
+		}
+
 
 		[Test]
 		public async Task RemovesExpense_ReceiveExistingEntity_ReturnsTrue()

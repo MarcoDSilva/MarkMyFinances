@@ -32,6 +32,8 @@ namespace MarkMyFinance.API.Controllers
 		[Route("{id:int}")]
 		public async Task<IActionResult> GetById(int id)
 		{
+			if (id <= 0) return Problem("Id cannot be lower than 0");
+
 			var expense = await _expenseService.GetByID(id);
 
 			return expense is null || expense.Id <= 0 ? NotFound() : Ok(expense);
