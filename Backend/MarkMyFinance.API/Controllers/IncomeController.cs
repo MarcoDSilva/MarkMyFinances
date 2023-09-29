@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MarkMyFinance.API.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api/v1/[controller]")]
 	[ApiController]
 	[ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
 	[ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
@@ -57,7 +57,7 @@ namespace MarkMyFinance.API.Controllers
 			return wasAdded ? Ok() : Problem();
 		}
 
-		[HttpPut("{id:int}")]
+		[HttpPut]
 		public async Task<IActionResult> Update([FromBody] ExpenseRequest request)
 		{
 			var incomeDto = new IncomeDto()

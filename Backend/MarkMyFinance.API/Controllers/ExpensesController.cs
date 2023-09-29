@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MarkMyFinance.API.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api/v1/[controller]")]
 	[ApiController]
 	[ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
 	[ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
