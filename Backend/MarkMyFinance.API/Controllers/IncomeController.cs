@@ -1,7 +1,7 @@
 ﻿using MarkMyFinance.API.DTO;
+using MarkMyFinance.API.Shared;
 using MarkMyFinance.Application.DTO;
 using MarkMyFinance.Application.Services.Interfaces;
-using MarkMyFinance.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -32,7 +32,7 @@ namespace MarkMyFinance.API.Controllers
 		[HttpGet("{id:int}")]
 		public async Task<IActionResult> GetById(int id)
 		{
-			if (id <= 0) return Problem("Id cannot be lower than 0");
+			if (id <= 0) return Problem(ErrorDescriptions.IdLowerThanOne);
 
 			var income = await _incomeService.GetByID(id);
 			return income is null || income.Id <= 0 ? NotFound() : Ok(income);
@@ -80,7 +80,7 @@ namespace MarkMyFinance.API.Controllers
 		[HttpDelete("{id:int}")]
 		public async Task<IActionResult> Delete(int id)
 		{
-			if (id <= 0) return Problem("");
+			if (id <= 0) return Problem(ErrorDescriptions.IdLowerThanOne);
 
 			var wasDeleted = await _incomeService.RemoveAsync(id);
 			return wasDeleted ? Ok() : Problem();

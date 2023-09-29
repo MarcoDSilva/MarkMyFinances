@@ -1,4 +1,5 @@
 ﻿using MarkMyFinance.API.DTO;
+using MarkMyFinance.API.Shared;
 using MarkMyFinance.Application.DTO;
 using MarkMyFinance.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -32,7 +33,7 @@ namespace MarkMyFinance.API.Controllers
 		[Route("{id:int}")]
 		public async Task<IActionResult> GetById(int id)
 		{
-			if (id <= 0) return Problem("Id cannot be lower than 0");
+			if (id <= 0) return Problem(ErrorDescriptions.IdLowerThanOne);
 
 			var expense = await _expenseService.GetByID(id);
 
@@ -76,6 +77,8 @@ namespace MarkMyFinance.API.Controllers
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> Delete(int id)
 		{
+			if (id <= 0) return Problem(ErrorDescriptions.IdLowerThanOne);
+
 			var expenseDeleted = await _expenseService.RemoveAsync(id);
 			return expenseDeleted ? Ok() : Problem();
 		}

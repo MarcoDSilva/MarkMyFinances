@@ -54,9 +54,6 @@ namespace MarkMyFinances.UnitTesting
 		[Test]
 		public async Task CreatesExpense_ReceivesWrongEntity_ReturnsFalse()
 		{
-			_expense.Object.Id = 1;
-			_expenseDto.Object.Id = 1;
-
 			_unitOfWork.Setup(exp => exp.ExpensesRepository.CreateAsync(It.IsAny<Expense>())).ReturnsAsync(false);
 
 			var result = await _expenseService.AddAsync(new Mock<ExpenseDto>().Object);
