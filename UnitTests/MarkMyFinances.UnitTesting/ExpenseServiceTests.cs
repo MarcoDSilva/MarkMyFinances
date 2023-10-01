@@ -40,9 +40,7 @@ namespace MarkMyFinances.UnitTesting
 		[Test]
 		public async Task CreatesExpense_ReceivesCorrectEntity_ReturnsTrue()
 		{
-			_expense.Object.Id = 1;
-			_expenseDto.Object.Id = 1;
-
+			_expenseDto.Object.Id = 1; 
 			_unitOfWork.Setup(exp => exp.ExpensesRepository.CreateAsync(It.IsAny<Expense>())).ReturnsAsync(true);
 
 			var result = await _expenseService.AddAsync(_expenseDto.Object);
@@ -50,7 +48,7 @@ namespace MarkMyFinances.UnitTesting
 			Assert.That(result, Is.EqualTo(true));
 		}
 
-		// this will be a exception
+		// this will be an exception
 		[Test]
 		public async Task CreatesExpense_ReceivesWrongEntity_ReturnsFalse()
 		{

@@ -11,9 +11,10 @@ namespace MarkMyFinance.API.Controllers
 	[Route("api/v1/[controller]")]
 	[ApiController]
 	[ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+	[ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
 	[ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
 	[ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-	[ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
 	public class ExpensesController : ControllerBase
 	{
 		private readonly IServices<ExpenseDto> _expenseService;
@@ -33,7 +34,7 @@ namespace MarkMyFinance.API.Controllers
 		[Route("{id:int}")]
 		public async Task<IActionResult> GetById(int id)
 		{
-			if (id <= 0) return Problem(ErrorDescriptions.IdLowerThanOne);
+			if (id <= 0) return BadRequest(ErrorDescriptions.IdLowerThanOne);
 
 			var expense = await _expenseService.GetByID(id);
 
@@ -77,7 +78,7 @@ namespace MarkMyFinance.API.Controllers
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> Delete(int id)
 		{
-			if (id <= 0) return Problem(ErrorDescriptions.IdLowerThanOne);
+			if (id <= 0) return BadRequest(ErrorDescriptions.IdLowerThanOne);
 
 			var expenseDeleted = await _expenseService.RemoveAsync(id);
 			return expenseDeleted ? Ok() : Problem();

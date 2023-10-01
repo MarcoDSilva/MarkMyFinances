@@ -11,9 +11,10 @@ namespace MarkMyFinance.API.Controllers
 	[Route("api/v1/[controller]")]
 	[ApiController]
 	[ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+	[ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
 	[ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
 	[ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-	[ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
 	public class IncomeController : ControllerBase
 	{
 		private readonly IServices<IncomeDto> _incomeService;
@@ -32,7 +33,7 @@ namespace MarkMyFinance.API.Controllers
 		[HttpGet("{id:int}")]
 		public async Task<IActionResult> GetById(int id)
 		{
-			if (id <= 0) return Problem(ErrorDescriptions.IdLowerThanOne);
+			if (id <= 0) return BadRequest(ErrorDescriptions.IdLowerThanOne);
 
 			var income = await _incomeService.GetByID(id);
 			return income is null || income.Id <= 0 ? NotFound() : Ok(income);
@@ -80,7 +81,7 @@ namespace MarkMyFinance.API.Controllers
 		[HttpDelete("{id:int}")]
 		public async Task<IActionResult> Delete(int id)
 		{
-			if (id <= 0) return Problem(ErrorDescriptions.IdLowerThanOne);
+			if (id <= 0) return BadRequest(ErrorDescriptions.IdLowerThanOne);
 
 			var wasDeleted = await _incomeService.RemoveAsync(id);
 			return wasDeleted ? Ok() : Problem();
