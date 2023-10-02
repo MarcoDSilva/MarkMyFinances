@@ -92,7 +92,7 @@ namespace MarkMyFinances.UnitTesting
 		}
 
 		[Test]
-		public void GetExpenseById_ReceivesCorrectId_ReturnsExpense()
+		public void GetCategoryById_ReceivesCorrectId_ReturnsCategory()
 		{
 			int id = 1;
 			_unitOfWork.Setup(cat => cat.CategoryRepository.GetByIdAsync(id)).ReturnsAsync(_category.Object);
@@ -102,7 +102,5 @@ namespace MarkMyFinances.UnitTesting
 			Assert.That(result, Is.Not.Null);
 			Assert.That(result.Id, Is.EqualTo(id));
 		}
-
-
 	}
 }
