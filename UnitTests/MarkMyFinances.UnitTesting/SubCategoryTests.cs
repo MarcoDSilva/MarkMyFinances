@@ -97,7 +97,7 @@ namespace MarkMyFinances.UnitTesting
 			int id = 1;
 			_unitOfWork.Setup(sub => sub.SubCategoryRepository.GetByIdAsync(id)).ReturnsAsync(_subCategory.Object);
 
-			var result = _services.GetByID(id);
+			var result =  _services.GetByID(id);
 
 			Assert.That(result, Is.Not.Null);
 			Assert.That(result.Id, Is.EqualTo(id));

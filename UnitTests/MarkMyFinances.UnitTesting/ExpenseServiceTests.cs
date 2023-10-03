@@ -98,9 +98,10 @@ namespace MarkMyFinances.UnitTesting
 		public void GetExpenseById_ReceivesCorrectId_ReturnsExpense()
 		{
 			int expenseId = 1;
+			_expense.Object.Id = expenseId;
 			_unitOfWork.Setup(exp => exp.ExpensesRepository.GetByIdAsync(expenseId)).ReturnsAsync(_expense.Object);
 
-			var result = _expenseService.GetByID(expenseId);
+			var result =  _expenseService.GetByID(expenseId);
 
 			Assert.That(result, Is.Not.Null);
 			Assert.That(result.Id, Is.EqualTo(expenseId));

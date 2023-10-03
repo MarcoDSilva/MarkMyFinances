@@ -99,7 +99,7 @@ namespace MarkMyFinances.UnitTesting
 			int incomeId = 1;
 			_unitOfWork.Setup(inc => inc.IncomeRepository.GetByIdAsync(incomeId)).ReturnsAsync(_income.Object);
 
-			var result = _incomeService.GetByID(incomeId);
+			var result =  _incomeService.GetByID(incomeId);
 
 			Assert.That(result, Is.Not.Null);
 			Assert.That(result.Id, Is.EqualTo(incomeId));
