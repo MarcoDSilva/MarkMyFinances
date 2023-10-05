@@ -40,16 +40,16 @@ namespace MarkMyFinance.API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create([FromBody] IncomeRequest request)
+		public async Task<IActionResult> Create([FromBody] IncomeCreateRequest request)
 		{
 			var incomeDto = new IncomeDto()
 			{
 				CategoryId = request.CategoryId,
 				CreatedAt = DateTime.UtcNow,
+				UpdatedAt = DateTime.UtcNow,
 				Description = request.Description,
 				SubCategoryId = request.SubCategoryId,
 				TransactionDate = request.TransactionDate,
-				UpdatedAt = DateTime.UtcNow,
 				Value = request.Value
 			};
 
@@ -59,7 +59,7 @@ namespace MarkMyFinance.API.Controllers
 		}
 
 		[HttpPut]
-		public async Task<IActionResult> Update([FromBody] ExpenseRequest request)
+		public async Task<IActionResult> Update([FromBody] IncomeUpdateRequest request)
 		{
 			var incomeDto = new IncomeDto()
 			{

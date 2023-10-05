@@ -59,7 +59,7 @@ namespace MarkMyFinance.API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create([FromBody] SubCategoryRequest request)
+		public async Task<IActionResult> Create([FromBody] SubCategoryCreateRequest request)
 		{
 			var subCategoryDto = new SubCategoryDto()
 			{
@@ -74,7 +74,7 @@ namespace MarkMyFinance.API.Controllers
 		}
 
 		[HttpPut]
-		public async Task<IActionResult> Update([FromBody] SubCategoryRequest request)
+		public async Task<IActionResult> Update([FromBody] SubCategoryUpdateRequest request)
 		{
 			var subCategoryDto = new SubCategoryDto()
 			{

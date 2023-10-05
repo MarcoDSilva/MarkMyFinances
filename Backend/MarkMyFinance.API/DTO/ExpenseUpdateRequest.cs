@@ -2,7 +2,7 @@
 
 namespace MarkMyFinance.API.DTO
 {
-    public class ExpenseResponse : IBaseTransaction
+    public class ExpenseUpdateRequest : IBaseTransaction
 	{	
 	}
 }

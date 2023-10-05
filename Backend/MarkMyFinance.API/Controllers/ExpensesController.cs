@@ -42,24 +42,7 @@ namespace MarkMyFinance.API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create([FromBody] ExpenseRequest expense)
-		{
-			var expenseDto = new ExpenseDto()
-			{
-				CategoryId = expense.CategoryId,
-				Description = expense.Description,
-				SubCategoryId = expense.SubCategoryId,
-				TransactionDate = expense.TransactionDate,
-				Value = expense.Value
-			};
-
-			var expenseAdded = await _expenseService.AddAsync(expenseDto);
-
-			return expenseAdded ? Ok() : Problem();
-		}
-
-		[HttpPut()]
-		public async Task<IActionResult> Update([FromBody] ExpenseRequest expense)
+		public async Task<IActionResult> Create([FromBody] ExpenseCreateRequest expense)
 		{
 			var expenseDto = new ExpenseDto()
 			{
@@ -68,7 +51,28 @@ namespace MarkMyFinance.API.Controllers
 				SubCategoryId = expense.SubCategoryId,
 				TransactionDate = expense.TransactionDate,
 				Value = expense.Value,
-				Id = expense.Id
+				CreatedAt = DateTime.Now,
+				UpdatedAt = DateTime.Now
+			};
+
+			var expenseAdded = await _expenseService.AddAsync(expenseDto);
+
+			return expenseAdded ? Ok() : Problem();
+		}
+
+		[HttpPut()]
+		public async Task<IActionResult> Update([FromBody] ExpenseUpdateRequest expense)
+		{
+			var expenseDto = new ExpenseDto()
+			{
+				CategoryId = expense.CategoryId,
+				Description = expense.Description,
+				SubCategoryId = expense.SubCategoryId,
+				TransactionDate = expense.TransactionDate,
+				Value = expense.Value,
+				Id = expense.Id,
+				CreatedAt = expense.CreatedAt,
+				UpdatedAt = DateTime.Now
 			};
 
 			var expenseEdited = await _expenseService.EditAsync(expenseDto);

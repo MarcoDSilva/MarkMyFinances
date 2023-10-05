@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MarkMyFinance.API.DTO
 {
-	public class CategoryRequest : IBaseEntityDto
+	public class CategoryUpdateRequest : IBaseEntityDto
 	{
 		[Required, StringLength(50)]
 		public string Name { get; set; } = "";
