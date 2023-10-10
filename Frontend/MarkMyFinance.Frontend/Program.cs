@@ -1,4 +1,4 @@
-using MarkMyFinances.Frontend.Client;
+using MarkMyFinance.Frontend;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
